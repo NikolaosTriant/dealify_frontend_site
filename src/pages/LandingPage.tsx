@@ -428,7 +428,7 @@ export default function LandingPage() {
       },
       {
         title: 'Κάθε μέλος ξέρει τι του αναλογεί.',
-        desc: 'Νομικά, τεχνικά, οικονομικά τρέχουν ταυτόχρονα. Overdue alerts αυτόματα σε κάθε εμπλεκόμενο.',
+        desc: 'Νομικά, τεχνικά, οικονομικά τρέχουν ταυτόχρονα. Αυτόματες ειδοποιήσεις καθυστέρησης — χωρίς να σε ρωτάει κανείς.',
       },
       {
         title: 'Στέλνεις ένα link. Τελείωσε.',
@@ -436,7 +436,7 @@ export default function LandingPage() {
       },
       {
         title: 'Εγκρίνεις — το σύστημα κάνει τα υπόλοιπα.',
-        desc: 'Αυτόματη ειδοποίηση για επανυποβολή. Πλήρες audit trail που δεν χάνεται ποτέ.',
+        desc: 'Αυτόματη ειδοποίηση για επανυποβολή. Πλήρες ιστορικό εγγράφων που δεν χάνεται ποτέ.',
       },
     ];
 
@@ -548,7 +548,7 @@ export default function LandingPage() {
           <a className="landing-nav__link" href="#pricing">Τιμολόγηση</a>
           <a className="landing-nav__link" href="#contact">Επικοινωνία</a>
         </div>
-        <button className="landing-nav__cta" type="button">Ζητήστε demo</button>
+        <button className="landing-nav__cta" type="button">Ζήτησε demo</button>
       </nav>
 
       <main className="landing-main">
@@ -563,7 +563,7 @@ export default function LandingPage() {
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            Ζητήστε πρόσβαση →
+            Ζήτησε πρόσβαση →
           </button>
         </div>
 
@@ -593,18 +593,17 @@ export default function LandingPage() {
             Πόσα WhatsApp groups έχεις ανοιχτά <span>για μία αγοραπωλησία;</span>
           </h1>
           <p className="landing-hero__subtitle">
-            Το Dealify συντονίζει δικηγόρους, μηχανικούς, συμβολαιογράφους και πελάτες σε ένα μέρος.
-            Χωρίς email. Χωρίς τηλέφωνα.
+            Ο δικηγόρος, ο μηχανικός, ο συμβολαιογράφος — ο καθένας παίρνει ένα link και ανεβάζει ό,τι του αναλογεί, χωρίς app και χωρίς εγγραφή. Εσύ βλέπεις τα πάντα σε ένα μέρος.
           </p>
           <div className="landing-hero__actions">
             <button className="landing-hero__button landing-hero__button--primary" type="button">
-              Ζητήστε demo →
+              Ζήτησε demo →
             </button>
             <button className="landing-hero__button landing-hero__button--secondary" type="button">
-              Δείτε πώς δουλεύει
+              Δες πώς δουλεύει
             </button>
           </div>
-          <p className="landing-hero__note">Δωρεάν pilot για τους πρώτους 20 μεσίτες</p>
+          <p className="landing-hero__note">Δωρεάν pilot για τους πρώτους μεσίτες</p>
           <div className="lp-hero-card-wrap">
 
             <div className="lp-hero-card-glow" aria-hidden="true" />
@@ -670,7 +669,7 @@ export default function LandingPage() {
 
         {/* ── SNAP DOTS ─────────────────────────────────────────────────────────── */}
         <div className="snap-dots" aria-hidden="true">
-          {[0,1,2].map(i => (
+          {[0,1].map(i => (
             <div key={i} className="snap-dot" data-dot={i} />
           ))}
         </div>
@@ -883,8 +882,8 @@ export default function LandingPage() {
 
               <div className="s2-copy-block">
                 <div className="snap-copy-label">Το feature</div>
-                <div className="s2-copy-h2">Ένα ping σε όλους.<br/>Κάθε αρχείο στη θέση του.</div>
-                <p className="s2-copy-p">Ο broker στέλνει ταυτόχρονα σε δικηγόρο, μηχανικό, συμβολαιογράφο. Ο καθένας ανεβάζει από το κινητό του.</p>
+                <div className="s2-copy-h2">Στέλνεις ειδοποιήσεις σε όποιον χρειάζεται.<br/>Κάθε αρχείο πάντα στη θέση του.</div>
+                <p className="s2-copy-p">Ένα μήνυμα φτάνει ταυτόχρονα σε δικηγόρο, μηχανικό, συμβολαιογράφο. Ο καθένας ανεβάζει από το κινητό του, χωρίς να περιμένει κανέναν.</p>
               </div>
 
               {/* Members sidebar */}
@@ -966,69 +965,8 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
+              <p style={{fontSize:'11px',color:'rgba(255,255,255,0.3)',textAlign:'center',marginTop:'10px'}}>Αυτό βλέπει ο δικηγόρος στο κινητό του</p>
               <div className="s2-phone-caption">Κάθε μέλος λαμβάνει το δικό του link</div>
-            </div>
-
-          </section>
-
-          {/* ── SECTION 3 — PAYOFF ────────────────────────────────────────────────── */}
-          <section className="snap-section" data-section-idx="2"
-            style={{flexDirection:'row',alignItems:'stretch',padding:0,background:'linear-gradient(135deg,#071714 0%,#0B1E1A 50%,#071714 100%)'}}>
-            <div className="snap-title-card">
-              <span className="snap-title-step">03</span>
-              <span className="snap-title-label">Το Αποτέλεσμα</span>
-            </div>
-
-            {/* LEFT — Numbers */}
-            <div className="s3-content-left">
-              <div className="s3-numbers">
-                <div className="s3-check-ring">
-                  <div className="s3-check-icon">✓</div>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <div className="s3-big-number" id="s3-big-number">47</div>
-                  <div className="s3-number-label">ημέρες</div>
-                </div>
-                <div className="s3-stats-row" id="s3-stats-row">
-                  <div className="s3-stat s3-stat--anim" style={{'--si': 0} as React.CSSProperties}>
-                    <div className="s3-stat-val" data-target="0">0</div>
-                    <div className="s3-stat-label">τηλεφωνήματα</div>
-                  </div>
-                  <div className="s3-stat-divider" />
-                  <div className="s3-stat s3-stat--anim" style={{'--si': 1} as React.CSSProperties}>
-                    <div className="s3-stat-val" data-target="0">0</div>
-                    <div className="s3-stat-label">χαμένα email</div>
-                  </div>
-                  <div className="s3-stat-divider" />
-                  <div className="s3-stat s3-stat--anim" style={{'--si': 2} as React.CSSProperties}>
-                    <div className="s3-stat-val" data-target="6">0</div>
-                    <div className="s3-stat-label">μέλη ομάδας</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT — Copy + CTA */}
-            <div className="s3-content-right">
-              <span className="snap-copy-label">Το αποτέλεσμα</span>
-              <h2 className="snap-copy-h2">Αυτό είναι<br />το επόμενο<br />deal σας.</h2>
-              <div className="s3-deal-card">
-                <div className="s3-deal-row">
-                  <span className="s3-deal-label">Ακίνητο</span>
-                  <span className="s3-deal-val">Βούλα — Διαμ. 3ος</span>
-                </div>
-                <div className="s3-deal-row">
-                  <span className="s3-deal-label">Αξία</span>
-                  <span className="s3-deal-val s3-deal-val--teal">€280.000</span>
-                </div>
-                <div className="s3-deal-row">
-                  <span className="s3-deal-label">Διάρκεια</span>
-                  <span className="s3-deal-val">47 ημέρες</span>
-                </div>
-                <div className="s3-status-pill">✓ Ολοκληρώθηκε · 2 Απρ 2026</div>
-              </div>
-              <button className="s3-cta-btn" type="button">Ζητήστε demo →</button>
-              <p className="s3-cta-note">Χωρίς δέσμευση · Στα ελληνικά · 30 λεπτά αρκούν</p>
             </div>
 
           </section>
@@ -1223,10 +1161,10 @@ export default function LandingPage() {
                     num: '02',
                     tag: 'Συναλλαγή',
                     title: 'Κάθε μέλος ξέρει\nτι του αναλογεί.',
-                    desc: 'Νομικά, τεχνικά και οικονομικά έγγραφα τρέχουν ταυτόχρονα — χωρίς να περιμένει το ένα το άλλο.',
+                    desc: 'Νομικά, τεχνικά, οικονομικά τρέχουν ταυτόχρονα. Αυτόματες ειδοποιήσεις καθυστέρησης — χωρίς να σε ρωτάει κανείς.',
                     gains: [
-                      'Dependency graph — κανείς δεν μπλοκάρει άλλον χωρίς λόγο',
-                      'Overdue alerts αυτόματα σε κάθε εμπλεκόμενο',
+                      'Κανένας δεν σταματά κανέναν χωρίς λόγο',
+                      'Ειδοποιήσεις καθυστέρησης αυτόματα σε κάθε εμπλεκόμενο',
                       'Ολοκλήρωση χωρίς να κρατάς τίποτα στο κεφάλι σου',
                     ],
                   },
@@ -1237,7 +1175,7 @@ export default function LandingPage() {
                     desc: 'Δικηγόρος, μηχανικός, συμβολαιογράφος — ο καθένας βλέπει μόνο ό,τι τον αφορά, χωρίς εγγραφή.',
                     gains: [
                       'Χωρίς app, χωρίς εγγραφή, χωρίς εξήγηση',
-                      'Ο πελάτης βλέπει την πρόοδο real-time',
+                      'Ο πελάτης βλέπει την πρόοδο ανά πάσα στιγμή',
                       'Αρχεία ανεβαίνουν απευθείας στο deal',
                     ],
                   },
@@ -1245,7 +1183,7 @@ export default function LandingPage() {
                     num: '04',
                     tag: 'Έγγραφα',
                     title: 'Εγκρίνεις ή απορρίπτεις.\nΤο σύστημα κάνει τα υπόλοιπα.',
-                    desc: 'Πλήρης έλεγχος εγγράφων ανά συναλλαγή, με audit trail που δεν χάνεται ποτέ.',
+                    desc: 'Αυτόματη ειδοποίηση για επανυποβολή. Πλήρες ιστορικό εγγράφων που δεν χάνεται ποτέ.',
                     gains: [
                       'Εγκεκριμένο / Απορρίφθηκε / Εκκρεμεί — ένα κλικ',
                       'Αυτόματη ειδοποίηση στο μέλος για επανυποβολή',
@@ -1319,16 +1257,74 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ── SECTION 3 — PAYOFF ────────────────────────────────────────────────── */}
+        <section
+          style={{flexDirection:'row',alignItems:'stretch',padding:0,background:'linear-gradient(135deg,#071714 0%,#0B1E1A 50%,#071714 100%)'}}>
+
+          {/* LEFT — Numbers */}
+          <div className="s3-content-left">
+            <div className="s3-numbers">
+              <div className="s3-check-ring">
+                <div className="s3-check-icon">✓</div>
+              </div>
+              <div style={{textAlign:'center'}}>
+                <div className="s3-big-number" id="s3-big-number">47</div>
+                <div className="s3-number-label">ημέρες</div>
+              </div>
+              <div className="s3-stats-row" id="s3-stats-row">
+                <div className="s3-stat s3-stat--anim" style={{'--si': 0} as React.CSSProperties}>
+                  <div className="s3-stat-val" data-target="0">0</div>
+                  <div className="s3-stat-label">ατελείωτες κλήσεις</div>
+                </div>
+                <div className="s3-stat-divider" />
+                <div className="s3-stat s3-stat--anim" style={{'--si': 1} as React.CSSProperties}>
+                  <div className="s3-stat-val" data-target="0">0</div>
+                  <div className="s3-stat-label">χαμένα email</div>
+                </div>
+                <div className="s3-stat-divider" />
+                <div className="s3-stat s3-stat--anim" style={{'--si': 2} as React.CSSProperties}>
+                  <div className="s3-stat-val" data-target="6">0</div>
+                  <div className="s3-stat-label">μέλη ομάδας</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — Copy + CTA */}
+          <div className="s3-content-right">
+            <span className="snap-copy-label">Το αποτέλεσμα</span>
+            <h2 className="snap-copy-h2">Αυτό είναι<br />το επόμενο<br />deal σου.</h2>
+            <div className="s3-deal-card">
+              <div className="s3-deal-row">
+                <span className="s3-deal-label">Ακίνητο</span>
+                <span className="s3-deal-val">Βούλα — Διαμ. 3ος</span>
+              </div>
+              <div className="s3-deal-row">
+                <span className="s3-deal-label">Αξία</span>
+                <span className="s3-deal-val s3-deal-val--teal">€280.000</span>
+              </div>
+              <div className="s3-deal-row">
+                <span className="s3-deal-label">Διάρκεια</span>
+                <span className="s3-deal-val">47 ημέρες</span>
+              </div>
+              <div className="s3-status-pill">✓ Ολοκληρώθηκε · 2 Απρ 2026</div>
+            </div>
+            <button className="s3-cta-btn" type="button">Ζήτησε demo →</button>
+            <p className="s3-cta-note">Χωρίς δέσμευση · Στα ελληνικά · 30 λεπτά αρκούν</p>
+          </div>
+
+        </section>
+
         {/* ── PRICING SECTION ─────────────────────────────────────────────────────── */}
         <section className="lp-pricing" id="pricing">
           <div className="lp-pricing-inner">
 
             <div className="lp-section-header">
               <span className="lp-section-tag">Τιμολόγηση</span>
-              <h2 className="lp-section-title">Απλή τιμολόγηση.<br />Ξεκινάτε αμέσως.</h2>
+              <h2 className="lp-section-title">Απλή τιμολόγηση.<br />Βρες το πλάνο σου.</h2>
               <p className="lp-section-sub">
                 Πιλοτικό πρόγραμμα σε εξέλιξη — οι τιμές οριστικοποιούνται σύντομα.
-                Επικοινωνήστε μαζί μας για πρόωρη πρόσβαση.
+                Επικοινώνησε μαζί μας για πρόωρη πρόσβαση.
               </p>
             </div>
 
@@ -1348,7 +1344,7 @@ export default function LandingPage() {
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                 </ul>
-                <button className="lp-plan-cta" type="button">Επικοινωνήστε μαζί μας</button>
+                <button className="lp-plan-cta" type="button">Επικοινώνησε μαζί μας</button>
               </div>
 
               <div className="lp-plan-card">
@@ -1365,7 +1361,7 @@ export default function LandingPage() {
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                 </ul>
-                <button className="lp-plan-cta" type="button">Επικοινωνήστε μαζί μας</button>
+                <button className="lp-plan-cta" type="button">Επικοινώνησε μαζί μας</button>
               </div>
 
               <div className="lp-plan-card lp-plan-card--featured">
@@ -1383,7 +1379,7 @@ export default function LandingPage() {
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                 </ul>
-                <button className="lp-plan-cta lp-plan-cta--featured" type="button">Επικοινωνήστε μαζί μας</button>
+                <button className="lp-plan-cta lp-plan-cta--featured" type="button">Επικοινώνησε μαζί μας</button>
               </div>
 
               <div className="lp-plan-card">
@@ -1399,7 +1395,7 @@ export default function LandingPage() {
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                   <li className="lp-plan-feature lp-plan-feature--empty">—</li>
                 </ul>
-                <button className="lp-plan-cta" type="button">Επικοινωνήστε μαζί μας</button>
+                <button className="lp-plan-cta" type="button">Επικοινώνησε μαζί μας</button>
               </div>
 
             </div>
@@ -1415,7 +1411,7 @@ export default function LandingPage() {
         <section className="lp-cta" id="contact">
           <div className="lp-cta-inner">
             <div className="lp-cta-tag">Πιλοτικό πρόγραμμα</div>
-            <h2 className="lp-cta-title">Κλείστε deals πιο γρήγορα.</h2>
+            <h2 className="lp-cta-title">Το επόμενο deal σου — χωρίς το χάος.</h2>
             <p className="lp-cta-sub">
               Πιλοτικό πρόγραμμα για μεσιτικά γραφεία. Ο μεσίτης στήνει το
               deal — οι υπόλοιποι μπαίνουν με ένα link. Χωρίς δέσμευση.
@@ -1424,10 +1420,10 @@ export default function LandingPage() {
               <input
                 className="lp-cta-input"
                 type="email"
-                placeholder="το email σας"
+                placeholder="το email σου"
               />
               <button className="lp-cta-btn" type="button">
-                Ζητήστε πρόσβαση →
+                Ζήτησε πρόσβαση →
               </button>
             </div>
             <p className="lp-cta-note">
