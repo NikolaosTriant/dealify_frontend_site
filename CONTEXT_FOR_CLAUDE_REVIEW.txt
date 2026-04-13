@@ -1,0 +1,446 @@
+TrustLayer Frontend Context (for Claude review)
+Last updated: 2026-02-22
+Project path: /home/dienosaur/mesitika/Mesitika
+
+==================================================
+1) PRODUCT SUMMARY
+==================================================
+TrustLayer is a real-estate transaction orchestration UI for the pre-notary phase.
+Primary pilot audience: RE/MAX Greece brokers.
+
+Core concept:
+- Broker coordinates parties (lawyer, engineer, notary, accountant, etc.)
+- Deals move through template-based stages/tasks with dependencies
+- Client gets link-based portal (no login)
+- Members get assigned task-focused views
+
+Current implementation status in this repo:
+- Frontend-only demo/prototype
+- Mostly mock data in components
+- No backend/API integration yet
+- No real auth yet
+
+==================================================
+2) BRAND / DESIGN TOKENS USED
+==================================================
+- Primary blue: #003DA5
+- Accent red: #DC1C2E
+- White: #FFFFFF
+- Page gray: #F5F5F5
+
+Color usage in current UI:
+- Blue for headers/navigation/primary actions
+- Red for alerts/overdue/rejections/high-value badges
+- Green for completed/approved states
+
+==================================================
+3) TECH STACK / RUNTIME
+==================================================
+- React + TypeScript (Vite)
+- Tailwind CSS
+- Iconography: lucide-react
+- Additional libs already present: React DnD, Radix UI, etc.
+
+Key scripts:
+- npm run dev
+- npm run build
+
+Build status:
+- Latest build succeeds.
+
+==================================================
+4) CURRENT INFORMATION ARCHITECTURE (SIDEBAR)
+==================================================
+Final sidebar currently implemented as:
+1. Dashboard
+2. Ακίνητα
+3. Πελάτες & Matching
+4. Συναλλαγές / Skill Tree
+   - Έλεγχος Εγγράφων (nested item)
+5. Εργασίες Μελών
+6. Templates
+7. UI Πελατών (dropdown)
+   - Πύλη Πελάτη
+   - Cost Calculator
+
+Why this matters:
+- Broker workspace screens are separated from client-facing UI design screens.
+- Client UI remains directly viewable from broker shell for design/review convenience.
+
+==================================================
+5) ROUTING / NAVIGATION MODEL
+==================================================
+Routing is custom path-state mapping (not full react-router setup), implemented in:
+- src/app/screens.ts
+- src/app/App.tsx
+
+Supported paths:
+- /dashboard -> broker-dashboard
+- /listings -> broker-listings
+- /leads -> broker-leads-matching
+- /transaction -> broker-transaction-detail
+- /transaction/:id/documents -> broker-document-review
+- /member-tasks -> broker-member-task-view
+- /templates -> broker-template-builder
+- /client/:token -> broker-client-portal
+- /calculator -> public-calculator
+
+Navigation behavior:
+- Uses history.pushState + popstate listener
+- Active screen held in App state
+- transactionId state used for document review path
+
+==================================================
+6) SCREEN-BY-SCREEN IMPLEMENTATION STATUS
+==================================================
+
+6.1 Dashboard (/dashboard)
+Main file(s):
+- src/app/components/DashboardPage.tsx
+- src/app/components/DealCard.tsx
+- src/app/components/PipelineFilterBar.tsx
+- src/app/components/KanbanColumn.tsx
+
+Implemented:
+- Stat cards row (active deals, overdue tasks, avg days, monthly completed)
+- New Leads horizontal strip between stat cards and filter bar
+  - Title + badge count + View All
+  - Compact lead cards with source/timestamp
+  - Start Deal button (currently demo alert with prefilled info)
+  - Strip hides if no leads
+- Filter bar (All / My Deals / Overdue logic)
+- Kanban-style stage columns
+- Deal cards include:
+  - Property preview image carousel (auto cycle + arrows + dots)
+  - Progress bar
+  - Overdue badge
+  - Agent initials + days in stage
+
+Current limitations:
+- Data fully mocked
+- Start Deal does not open real creation flow yet (alert placeholder)
+
+
+6.2 Ακίνητα / My Listings (/listings)
+Main file:
+- src/app/pages/MyListingsPage.tsx
+
+Implemented:
+- Top search/filter bar:
+  - text search
+  - property type
+  - price range
+  - status
+- Left vertical list of listing cards:
+  - photo placeholder
+  - address/type/price
+  - metrics (views, saves, repeat visitors)
+  - high activity indicator in red
+- Right panel details for selected listing:
+  - Views over time (custom SVG line chart)
+  - Recent visitors list (Visitor #1 style anonymization)
+  - per-visitor stats (visit count, time spent, also viewed)
+  - Add to Leads action button (demo behavior)
+
+Current limitations:
+- No backend analytics source
+- No persistence for Add to Leads action
+
+
+6.3 Πελάτες & Matching (/leads)
+Main file:
+- src/app/pages/LeadsMatchingPage.tsx
+
+Implemented:
+- Two-column layout
+- Left column leads list with:
+  - name/email/phone/source/value tag/group
+  - filters by group/source/value
+  - Add Lead button (demo alert)
+- Drag/drop interaction:
+  - lead cards draggable
+  - drop zones for groups
+  - updates lead group in local state
+- Right column property groups:
+  - grouped cards (e.g. budget/location clusters)
+  - match score calculation for selected lead
+  - visual highlight for stronger matches
+- Bottom action:
+  - Send Suggestions button (demo alert with matched groups)
+
+Current limitations:
+- No real messaging/email integration
+- Matching logic is heuristic and local only
+
+
+6.4 Συναλλαγές / Skill Tree (/transaction)
+Main file(s):
+- src/app/components/TransactionDetailPage.tsx
+- src/app/components/BranchDependencyGraph.tsx
+- src/app/components/BranchNode.tsx
+- src/app/components/TaskSlidePanel.tsx
+- src/app/components/TaskTimelineList.tsx
+- src/app/components/TransactionDetailSidebar.tsx
+
+Implemented:
+- Left transaction info sidebar:
+  - property info, dates, team members
+- Main dependency visualization:
+  - multiple branches (νομικός/τεχνικός/οικονομικός)
+  - convergence nodes toward final signing
+- Task click opens slide-out panel:
+  - notes, docs, activity timeline style details
+- Timeline/list section for task overview
+- CTA to open client portal preview
+
+Current limitations:
+- Graph data mocked
+- No real dependency solver / state transitions backed by API
+
+
+6.5 Έλεγχος Εγγράφων (/transaction/:id/documents)
+Main file:
+- src/app/pages/TransactionDocumentsPage.tsx
+
+Implemented:
+- Property info bar (address/client/template/transaction id)
+- Checklist table with columns:
+  - document name
+  - status
+  - file preview link
+  - uploaded date
+  - approve/reject actions
+- Rejection reason input
+- Row color states:
+  - green approved
+  - red rejected + visible note to client
+- Footer progress bar X/Y approved
+- Activate Transaction DAG button appears when all approved
+
+Current limitations:
+- Approve/reject only local state
+- No storage, no role permissions
+
+
+6.6 Εργασίες Μελών (/member-tasks)
+Main file:
+- src/app/components/ProfessionalTaskDashboard.tsx
+
+Implemented:
+- Task-centric dashboard across transactions
+- Grouping/filtering/search
+- Status badges and due date urgency visuals
+- Bulk selection actions
+- Notes/upload action affordances
+- My Week style summary and per-transaction visibility features
+
+Current limitations:
+- Heavy mock data
+- Upload/actions non-persistent
+
+
+6.7 Templates (/templates)
+Main file:
+- src/app/components/TemplateBuilderPage.tsx
+
+Implemented:
+- Stage/task template editor
+- Drag-and-drop stage reordering (React DnD)
+- Expand/collapse stages
+- Task rows with:
+  - role
+  - estimated days
+  - dependencies
+  - description
+- Add/delete stages and tasks
+- Live preview concept included in page actions
+
+Current limitations:
+- No save to backend
+- Dependencies not validated against graph rules yet
+
+
+6.8 UI Πελατών -> Πύλη Πελάτη (/client/:token)
+Main file:
+- src/app/components/ClientPortalPage.tsx
+
+This is a mobile-first composite client experience with two phases.
+
+Phase A: Document Submission (initial)
+Implemented:
+- Top property card (title/address/price/photo placeholder)
+- Required docs list from mock template
+- Per doc row:
+  - name + description
+  - status badge (Pending/Uploaded/Approved/Rejected)
+  - upload input (PDF/JPG/PNG, max 10MB)
+  - rejection comment display
+  - filename/date display
+- row color states:
+  - approved green
+  - rejected red
+- progress bar X/Y submitted
+- auto transition trigger when all approved
+
+Demo behavior note:
+- Uploaded docs are auto-approved after short timeout to simulate broker review.
+
+Phase B: Process Tracker / simplified skill tree
+Implemented:
+- completion ring (% based on completed tasks)
+- vertical stepper/stages with role-only visibility
+- statuses:
+  - completed with date
+  - in progress
+  - locked
+  - overdue (red)
+- expanded stage tasks
+- Send Reminder button for overdue/in-progress tasks
+
+Nudge/reminder behavior implemented:
+- confirmation modal: "Send reminder to [role] via email?"
+- on send:
+  - task stores reminderSentAt timestamp
+  - button disabled for 48h cooldown
+  - label changes to "Reminder sent [date]"
+  - local notification record added with:
+    - type = nudge
+    - channel = email
+    - brokerNotified = true
+
+Activity feed section:
+- collapsible Activity Log
+- reverse chronology entries
+- icon/title/description/timestamp
+- tone styles:
+  - info (blue)
+  - success (green)
+  - alert/action-needed (red)
+- filters: All / Action Needed / Milestones
+
+Contact & Help section:
+- broker contact card with tel/mailto links
+- FAQ accordion with requested questions
+- message form (subject + textarea + send)
+- send appends mock activity event
+
+Bottom nav tabs in process phase:
+- Διαδικασία
+- Activity
+- Βοήθεια
+
+Current limitations:
+- Token not validated
+- No real file storage
+- No real email/SMS/notification backend
+
+
+6.9 UI Πελατών -> Cost Calculator (/calculator)
+Main file:
+- src/app/pages/CostCalculatorPage.tsx
+
+Implemented:
+- Public no-login calculator
+- Inputs:
+  - property value
+  - property type
+  - region
+  - first-time buyer toggle
+  - mortgage toggle
+  - editable broker commission
+- Calculation output breakdown:
+  - transfer tax (3%) or VAT (24% for new-build)
+  - notary fees (tiered)
+  - lawyer fees by region
+  - engineer fees by type
+  - broker commission
+  - mortgage extras (if selected)
+  - optional first-time buyer discount rule
+- total highlighted in red
+- CTA card with email capture
+
+Current limitations:
+- Pure frontend calculator
+- No persisted leads pipeline integration yet
+
+==================================================
+7) DATA / STATE CHARACTERISTICS (IMPORTANT)
+==================================================
+Current data model is component-local mock state.
+There is no shared global store and no backend sync.
+
+Implications:
+- Refresh resets most state
+- Cross-screen actions (e.g. Add to Leads from Listings, Start Deal from New Leads) are mostly demo placeholders
+- Needed next step for production-quality demo is at least a temporary central mock-store (context/zustand) or API layer
+
+==================================================
+8) KNOWN GAPS / RISKS FOR REVIEW
+==================================================
+Functional gaps:
+- No authentication/authorization
+- No backend API integration
+- No database persistence
+- No real notification channels (email/SMS)
+- No document storage backend
+- No true token lifecycle/security
+- No role-based data access enforcement
+
+UX/Product gaps:
+- Some English labels remain in mixed Greek UI
+- Some alerts are placeholder popups
+- Client portal is currently reachable from broker shell for design convenience (not strict app separation)
+- No full responsive QA pass across all broker pages yet
+
+Engineering gaps:
+- Custom router state works but is limited vs full react-router
+- No tests (unit/integration/e2e)
+- No type-safe API contracts yet
+- No error boundaries / robust empty/loading states across all pages
+
+==================================================
+9) FILE MAP (MOST IMPORTANT FILES)
+==================================================
+Core shell:
+- src/app/App.tsx
+- src/app/screens.ts
+- src/app/components/Sidebar.tsx
+
+Broker pages:
+- src/app/components/DashboardPage.tsx
+- src/app/pages/MyListingsPage.tsx
+- src/app/pages/LeadsMatchingPage.tsx
+- src/app/components/TransactionDetailPage.tsx
+- src/app/components/ProfessionalTaskDashboard.tsx
+- src/app/components/TemplateBuilderPage.tsx
+- src/app/pages/TransactionDocumentsPage.tsx
+
+Client/public pages:
+- src/app/components/ClientPortalPage.tsx
+- src/app/pages/CostCalculatorPage.tsx
+
+Shared/atoms:
+- src/app/components/DealCard.tsx
+- src/app/components/PipelineFilterBar.tsx
+- src/app/components/StatCard.tsx
+
+==================================================
+10) WHAT WE NEED FROM CLAUDE REVIEW (SUGGESTED PROMPT DIRECTION)
+==================================================
+Please review this frontend prototype and propose:
+1) Information architecture and UX improvements per screen.
+2) Data architecture for moving from local mock state to API-backed state.
+3) A phased implementation plan (MVP -> pilot-ready -> production).
+4) Specific recommendations for Greek market/legal transaction nuances.
+5) UI consistency checklist (language consistency, components, spacing, states).
+6) Suggested API contracts and entities for backend handoff.
+7) Demo flow script for investor/client pitch (2-5 minute guided scenario).
+
+==================================================
+11) QUICK EXECUTION NOTES
+==================================================
+- Install: npm i
+- Dev: npm run dev
+- Build: npm run build
+
+This context reflects current frontend implementation only.

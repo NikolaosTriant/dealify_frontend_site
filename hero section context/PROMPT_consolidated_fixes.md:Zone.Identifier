@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://claude.ai/chat/22a20f43-b447-4b40-9c31-71c087611bac
+HostUrl=https://claude.ai/api/organizations/01e18c10-bae9-47f1-8957-b03c81828ea3/conversations/22a20f43-b447-4b40-9c31-71c087611bac/wiggle/download-file?path=%2Fmnt%2Fuser-data%2Foutputs%2FPROMPT_consolidated_fixes.md
